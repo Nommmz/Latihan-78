@@ -21,17 +21,17 @@
 </head>
 <body>
 
-    <h1>Pengisian Data Pegawai</h1>
+    <h1>Form Data Pegawai Perusahaannya Bos </h1>
     <div id="formContainer"></div>
-    <button id="submitBtn">Kirim</button>
+    <button id="submitButton">Kirim ke bos</button>
 
     <script>
 
         const formData = [
-            { label: "Nama Lengkap", id: "name", errorMessage: "Nama harus diisi." },
-            { label: "Email", id: "email", errorMessage: "Email harus diisi." },
-            { label: "Jabatan", id: "position", errorMessage: "Jabatan harus diisi." },
-            { label: "Departemen", id: "department", errorMessage: "Departemen harus diisi." }
+            { label: "Nama Lengkap", id: "name", errorMessage: "Nama nya di isi dulu dong !" },
+            { label: "Email", id: "email", errorMessage: "Email nya di isi dulu bos !" },
+            { label: "Jabatan", id: "position", errorMessage: "Jabatan nya belum di isi tuh !" },
+            { label: "Departemen", id: "department", errorMessage: "Departemen nya kok belum di isi ?" }
         ];
 
         const formContainer = document.getElementById("formContainer");
@@ -73,9 +73,9 @@
             return formIsValid;
         };
 
-        document.getElementById("submitBtn").addEventListener("click", () => {
+        document.getElementById("submitButton").addEventListener("click", () => {
             if (validateForm()) {
-                alert("Data pegawai berhasil dikirim!");
+                alert("Data pegawai berhasil dikirim dan tidak ada eror");
                 formData.forEach(field => document.getElementById(field.id).value = "");
             }
         });
