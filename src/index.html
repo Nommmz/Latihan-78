@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Data Pegawai</title>
+    <style>
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pengisian Data Pegawai</h1>
+    <div id="formContainer"></div>
+    <button id="submitBtn">Kirim</button>
+
+    <script>
+
+        const formData = [
+            { label: "Nama Lengkap", id: "name", errorMessage: "Nama harus diisi." },
+            { label: "Email", id: "email", errorMessage: "Email harus diisi." },
+            { label: "Jabatan", id: "position", errorMessage: "Jabatan harus diisi." },
+            { label: "Departemen", id: "department", errorMessage: "Departemen harus diisi." }
+        ];
+
+        const formContainer = document.getElementById("formContainer");
+        formData.forEach(field => {
+            const formGroup = document.createElement("div");
+            formGroup.classList.add("form-group");
+
+            const label = document.createElement("label");
+            label.textContent = field.label;
+
+            const input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("id", field.id);
+
+            const errorMessage = document.createElement("span");
+            errorMessage.classList.add("error-message");
+            errorMessage.setAttribute("id", `${field.id}Error`);
+            errorMessage.textContent = field.errorMessage;
+
+            formGroup.appendChild(label);
+            formGroup.appendChild(input);
+            formGroup.appendChild(errorMessage);
+            formContainer.appendChild(formGroup);
+        });
+
+        const validateForm = () => {
+            let formIsValid = true;
+            formData.forEach(field => {
+                const input = document.getElementById(field.id);
+                const errorMessage = document.getElementById(`${field.id}Error`);
+
+                if (input.value.trim() === "") {
+                    errorMessage.style.display = "block";
+                    formIsValid = false;
+                } else {
+                    errorMessage.style.display = "none";
+                }
+            });
+            return formIsValid;
+        };
+
+        document.getElementById("submitBtn").addEventListener("click", () => {
+            if (validateForm()) {
+                alert("Data pegawai berhasil dikirim!");
+                formData.forEach(field => document.getElementById(field.id).value = "");
+            }
+        });
+    </script>
+
+</body>
+</html>
